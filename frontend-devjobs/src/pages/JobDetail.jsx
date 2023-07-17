@@ -9,7 +9,7 @@ import NavBar from "../components/NavBar";
 export const JobDetail = () => {
   const { id } = useParams();
   const [jobDetails, setJobDetails] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     fetchJobDetails();
