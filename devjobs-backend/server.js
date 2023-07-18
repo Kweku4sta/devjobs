@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const app = express();
 const devjobsRouter = require("./route-devjobs");
 
@@ -28,7 +29,7 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
-
+app.use(express.static(path.join(__dirname, "starter-code")));
 app.use(express.json());
 app.get("/products", function (req, res, next) {
   res.json({
