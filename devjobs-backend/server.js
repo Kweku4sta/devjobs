@@ -26,7 +26,7 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("disconnected", () => {
   console.log("Mongoose disconnected from MongoDB cluster");
 });
-app.use(cors);
+app.use(cors());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, "starter-code")));
 app.use(express.json());
 app.get("/products", function (req, res, next) {
   res.json({
-    msg: "This is CORS-enabled for all origins, using the localhost! and everything",
+    msg: "This is CORS-enabled for all origins, using the localhost!  everything",
   });
 });
 app.use("/api/", devjobsRouter);
