@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const app = express();
 const devjobsRouter = require("./route-devjobs");
 
+app.use(cors());
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,7 +26,7 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("disconnected", () => {
   console.log("Mongoose disconnected from MongoDB cluster");
 });
-
+app.use(cors);
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
