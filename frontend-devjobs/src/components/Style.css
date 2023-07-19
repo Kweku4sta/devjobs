@@ -1,0 +1,25 @@
+:root {
+  /* Light mode colors */
+  --primary-color-light: #your-light-primary-color;
+  --background-color-light: #ffffff;
+
+  /* Dark mode colors */
+  --primary-color-dark: #your-dark-primary-color;
+  --background-color-dark: #000;
+
+  /* Default to light mode */
+  --primary-color: var(--primary-color-light);
+  --background-color: var(--background-color-light);
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+  --primary-color: var(--primary-color-dark);
+  --background-color: var(--background-color-dark);
+}
+
+/* Apply the styles to the body */
+body {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}

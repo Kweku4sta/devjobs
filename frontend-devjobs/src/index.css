@@ -32,12 +32,32 @@ code {
 html {
   box-sizing: border-box;
   font-family: "Kumbh Sans", sans-serif;
+  overflow-x: hidden;
 }
 body {
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+body.dark-mode {
+  background-color: #121721;
   overflow-x: hidden;
 }
 
 .nav {
   background-image: url("./assets/desktop/bg-pattern-header.svg");
   /* background-color: red; */
+}
+/* Media query for small screens */
+@media screen and (max-width: 767px) {
+  .nav {
+    background-image: url("./assets/mobile/bg-pattern-header.svg");
+  }
+}
+
+.svg-container.dark-mode {
+  --svg-color: #fff;
+}
+
+.svg-container.light-mode {
+  --svg-color: #5964e0;
 }

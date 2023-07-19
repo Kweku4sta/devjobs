@@ -1,38 +1,28 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import icon_sun from "../assets/desktop/icon-sun.svg";
 import icon_moon from "../assets/desktop/icon-moon.svg";
 import logo from "../assets/desktop/logo.svg";
 import { Link } from "react-router-dom";
+import { useDarkModeContext } from "./contexts/DarkModeContext";
+
 const NavBar = () => {
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(() => {
+    const savedToggledState = localStorage.getItem("isToggled");
+    return savedToggledState ? JSON.parse(savedToggledState) : false;
+  });
+
+  const { darkMode, toggleDarkMode } = useDarkModeContext();
+
+  useEffect(() => {
+    localStorage.setItem("isToggled", JSON.stringify(isToggled));
+  }, [isToggled]);
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
+    toggleDarkMode();
   };
-  return (
-    // <nav className="nav relative flex items-center justify-between px-4 pb-8 transform rounded-bl-none shadow-xl sm:rounded-bl-full h-28 lg:px-28 md:px-12 -rotate-y-180  ">
-    //   <div>
-    //     <img src={logo} alt="logo" />
-    //   </div>
-    //   <div className="flex items-center gap-3">
-    //     <img src={icon_sun} alt="icon-sun" />
-    //     <button
-    //       className={`flex items-center justify-start w-10 h-6 rounded-full bg-white transition-all duration-300 ${
-    //         isToggled ? "ml-auto" : "ml-0"
-    //       }`}
-    //       onClick={handleToggle}
-    //     >
-    //       <span
-    //         className={`w-4 h-4 rounded-full bg-blue-500 transition-all duration-300 transform ${
-    //           isToggled ? "translate-x-full" : "translate-x-0"
-    //         }`}
-    //       />
-    //     </button>
 
-    //     <img src={icon_moon} alt="icon_moon" />
-    //   </div>
-    // </nav>
+  return (
     <nav className=" nav relative flex items-center justify-between px-4 pb-8 transform rounded-bl-none shadow-xl sm:rounded-bl-full h-28 lg:px-28 md:px-12 -rotate-y-180  mb-10">
       <div>
         <Link
@@ -57,16 +47,15 @@ const NavBar = () => {
         </div>
 
         <div>
-          {/* <Toggler toggleDarkMode={toggleDarkMode} /> */}
           <button
             className={`flex items-center justify-start w-10 h-6 rounded-full bg-white transition-all duration-300 ${
-              isToggled ? "ml-auto" : "ml-0"
+              isToggled ? "ml-auto" : "mr-auto"
             }`}
             onClick={handleToggle}
           >
             <span
               className={`w-4 h-4 rounded-full bg-blue-500 transition-all duration-300 transform ${
-                isToggled ? "translate-x-full" : "translate-x-0"
+                isToggled ? "translate-x-1/3" : "translate-x-6"
               }`}
             />
           </button>

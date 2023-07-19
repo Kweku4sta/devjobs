@@ -3,34 +3,42 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/NavBar";
-// import image from `../assets/logos/${fileName}`;
-// import vector from "../assets/logos/vector.svg";
-
+import useDarkMode from "../components/useDarkMode";
+import { useDarkModeContext } from "../components/contexts/DarkModeContext";
+import { Loading } from "../components/Loading";
 export const JobDetail = () => {
   const { id } = useParams();
   const [jobDetails, setJobDetails] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useDarkModeContext();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://devjobs-backend-vgzv.onrender.com/api/devjob/${id}`
+        );
+        const responseData = await response.data;
+        console.log(responseData);
+        setJobDetails(responseData);
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false); // After 10 seconds, set isLoading to false
+        }, 1000); // 10 seconds in milliseconds
+      }
+    };
+
     fetchJobDetails();
   }, [id]);
 
-  const fetchJobDetails = async () => {
-    try {
-      const response = await axios.get(`/api/devjob/${id}`);
-      const responseData = await response.data;
-      setJobDetails(responseData);
-
-      console.log(jobDetails?.company, "the requirement here");
-      console.log(responseData, "let me check the thing here");
-      console.log(jobDetails, "the job details");
-    } catch (error) {
-      console.error("Error fetching job details:", error);
-    }
-  };
-
-  if (!jobDetails) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   const {
@@ -51,7 +59,7 @@ export const JobDetail = () => {
   console.log(logo);
 
   const updatedPath = logo.replace(/^\./, "");
-  const imageUrl = `http://localhost:3300/${updatedPath}`;
+  const imageUrl = `https://devjobs-backend-vgzv.onrender.com/${updatedPath}`;
   if (jobDetails) {
     return (
       <section
@@ -62,7 +70,6 @@ export const JobDetail = () => {
           className={`relative z-50 flex flex-col items-center justify-center gap-5  md:gap-20`}
         >
           <div className="grid gap-5 mx-4 lg:mx-64 md:mx-12 ">
-            {/* navbar */}
             <div
               className={`flex flex-col items-center justify-between h-40 -mt-6  rounded-lg md:h-auto md:flex-row md:pt-4 md:-mt-20${
                 isDarkMode ? " bg-myVeryDarkBlueColor" : " bg-white"
@@ -81,9 +88,9 @@ export const JobDetail = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 ">
                   <p
-                    className={`text-sm font-bold tracking-wider md:text-lg${
-                      isDarkMode ? "text-white" : " text-black"
-                    }`}
+                    className={`${
+                      !isDarkMode ? " text-black" : "text-white "
+                    }text-sm font-bold tracking-wider md:text-lg  mr-8`}
                   >
                     {company}
                   </p>
