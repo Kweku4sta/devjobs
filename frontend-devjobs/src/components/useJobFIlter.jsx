@@ -56,7 +56,9 @@ export const useJobFilter = () => {
 
     if (locationFilter !== "") {
       filteredJobs = filteredJobs.filter((job) =>
-        job.location.toLowerCase().startsWith(locationFilter.toLowerCase())
+        job.location
+          .toLowerCase()
+          .startsWith(locationFilter.toLowerCase().trim())
       );
     }
 
@@ -65,8 +67,8 @@ export const useJobFilter = () => {
       filteredJobs = filteredJobs.filter(
         (job) =>
           job.title?.toLowerCase().includes(searchTerm) ||
-          job.company?.toLowerCase().includes(searchTerm) ||
-          job.position?.toLowerCase().includes(searchTerm)
+          job.company?.toLowerCase().includes(searchTerm.trim()) ||
+          job.position?.toLowerCase().includes(searchTerm.trim())
       );
     }
 
