@@ -10,7 +10,7 @@ export const JobCard = ({ job }) => {
   return (
     <Link to={`/jobdetail/${job._id}`} key={job.id}>
       <div
-        className={`flex flex-col gap-2 w-full h-60  relative px-10 pb-10 pt-12 rounded-md font-semibold  ${
+        className={`flex flex-col gap-2 w-full min-h-52  py-4  relative px-10 pb-10 pt-12 rounded-md font-semibold  ${
           isDarkMode ? "    bg-myMidnightColor" : " bg-white"
         }`}
       >
@@ -35,7 +35,7 @@ export const JobCard = ({ job }) => {
           {job.position}
         </p>
         <p className=" text-myDarkGrayColor">{job.company}</p>
-        <p className=" text-myVioletColor pt-4">{job.location}</p>
+        <p className=" text-myVioletColor pt-4 ">{job.location}</p>
       </div>
     </Link>
   );
