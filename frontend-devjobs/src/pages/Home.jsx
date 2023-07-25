@@ -170,7 +170,7 @@ export const Home = () => {
               className="w-28 h-10  text-sm font-normal text-white rounded-md bg-myVioletColor hover:bg-myLightVioletColor mb-8 "
               onClick={loadMoreJobs}
             >
-              Load More
+              {loading ? "Loading..." : "Load More"}
             </button>
           )}
         </div>

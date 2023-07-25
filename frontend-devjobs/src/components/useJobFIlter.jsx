@@ -58,6 +58,7 @@ export const useJobFilter = () => {
       filteredJobs = filteredJobs.filter((job) =>
         job.location
           .toLowerCase()
+          .trim()
           .startsWith(locationFilter.toLowerCase().trim())
       );
     }
