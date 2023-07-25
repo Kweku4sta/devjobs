@@ -5,12 +5,12 @@ import { useDarkModeContext } from "./contexts/DarkModeContext";
 export const JobCard = ({ job }) => {
   const updatedPath = job.logo.replace(/^\./, "");
   const imageUrl = `https://devjobs-backend-vgzv.onrender.com/${updatedPath}`;
-  const { isDarkMode, toggleDarkMode } = useDarkModeContext();
+  const { isDarkMode } = useDarkModeContext();
 
   return (
     <Link to={`/jobdetail/${job._id}`} key={job.id}>
       <div
-        className={`flex flex-col gap-2 w-full h-52  relative px-10 pb-10 pt-12 font-semibold ${
+        className={`flex flex-col gap-2 w-full h-52  relative px-10 pb-10 pt-12 rounded-md font-semibold ${
           isDarkMode ? "    bg-myMidnightColor" : " bg-white"
         }`}
       >

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/NavBar";
-import useDarkMode from "../components/useDarkMode";
+
 import { useDarkModeContext } from "../components/contexts/DarkModeContext";
 import { Loading } from "../components/Loading";
 export const JobDetail = () => {
   const { id } = useParams();
   const [jobDetails, setJobDetails] = useState(null);
-  const { isDarkMode, toggleDarkMode } = useDarkModeContext();
+  const { isDarkMode } = useDarkModeContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +42,6 @@ export const JobDetail = () => {
   }
 
   const {
-    title,
     company,
     description,
     location,
@@ -71,13 +70,13 @@ export const JobDetail = () => {
         >
           <div className="grid gap-5 mx-4 lg:mx-64 md:mx-12 ">
             <div
-              className={`flex flex-col items-center justify-between h-40 -mt-6  rounded-lg md:h-auto md:flex-row md:pt-4 md:-mt-20${
+              className={`flex flex-col items-center justify-between h-40 -mt-20  rounded-lg md:h-auto md:flex-row md:pt-4 md:-mt-20${
                 isDarkMode ? " bg-myVeryDarkBlueColor" : " bg-white"
               }`}
             >
               <div className="flex flex-col items-center h-10 gap-3 -mt-4 md:flex-row md:h-24 md:gap-6">
                 <div
-                  className="flex items-center self-start justify-center h-full p-6 mx-4 rounded-lg md:rounded-none md:px-8 md:mx-0 "
+                  className="flex items-center self-start justify-center h-full p-6 mx-4 rounded-lg md:rounded-none md:px-8 md:mx-0 md:mt-0"
                   style={{ backgroundColor: logoBackground }}
                 >
                   <img

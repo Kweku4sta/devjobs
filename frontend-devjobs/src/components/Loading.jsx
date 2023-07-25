@@ -3,31 +3,23 @@ import { motion } from "framer-motion";
 
 export const Loading = () => {
   const containerVariants = {
-    initial: {
-      opacity: 1,
-    },
     animate: {
-      opacity: 1,
+      y: ["0%", "-50%"], // Bouncing up and down
       transition: {
-        yoyo: Infinity,
-        duration: 1,
-        ease: "easeInOut",
+        yoyo: Infinity, // Repeat the animation indefinitely
+        duration: 1.5, // Adjust the duration for the speed of bouncing
+        ease: "easeInOut", // Use easeInOut easing for smooth animation
       },
     },
   };
 
   const circleVariants = {
-    initial: {
-      y: 0,
-      x: 0,
-    },
     animate: {
       y: [0, -20, 0, 20, 0], // Bouncing back going up, down, left, and right
-      x: [0, 20, 0, -20, 0], // Bouncing back going right, left, right, and left
       transition: {
-        yoyo: Infinity,
-        duration: 0.5, // Adjust the duration for faster speed
-        ease: "easeInOut",
+        yoyo: Infinity, // Repeat the animation indefinitely
+        duration: 0.5, // Adjust the duration for the speed of bouncing
+        ease: "easeInOut", // Use easeInOut easing for smooth animation
       },
     },
   };
@@ -37,13 +29,11 @@ export const Loading = () => {
       <motion.div
         className="loader-container w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center"
         variants={containerVariants}
-        initial="initial"
         animate="animate"
       >
         <motion.div
           className="loader-circle w-6 h-6 bg-blue-500 rounded-full"
           variants={circleVariants}
-          initial="initial"
           animate="animate"
         />
       </motion.div>

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { JobNotFound } from "./JobNotFound";
 import { useJobFilter } from "../components/useJobFIlter";
 import { JobCard } from "../components/JobCard";
 import NavBar from "../components/NavBar";
 import search_icon from "../assets/desktop/icon-search.svg";
 import location_icon from "../assets/desktop/icon-location.svg";
-import icon_filter from "../assets/mobile/icon-filter.svg";
+
 import { Modal } from "../components/Modal";
 import { useDarkModeContext } from "../components/contexts/DarkModeContext";
 import useOfflineStatus from "../components/useOfflineStatus";
@@ -17,7 +16,7 @@ import { Loading } from "../components/Loading";
 import { ErrorMessage } from "./ErrorMessage";
 
 export const Home = () => {
-  const { isDarkMode, toggleDarkMode } = useDarkModeContext();
+  const { isDarkMode } = useDarkModeContext();
   const isOffline = useOfflineStatus();
   console.log(isDarkMode, "dark in the home");
   const {
@@ -68,7 +67,7 @@ export const Home = () => {
             isDarkMode ? ` bg-myMidnightColor ` : `  bg-myWhiteColor `
           } rounded-sm `}
         >
-          <div className="relative flex justify-between w-full   border-r-slate-500 border-r-2 mr-2">
+          <div className="relative flex justify-between w-full   border-r-slate-500 md:border-r-2 mr-2">
             {/* <img
               src={search_icon}
               alt=""
@@ -78,7 +77,7 @@ export const Home = () => {
               <MySvgComponent />
             </div>
             <input
-              className={`w-full py-2 pl-8 pr-3 text-sm border-none lg:text-lg rounded-xl focus:outline-none text-myVeryDarkBlueColor${
+              className={`w-full py-2 pl-8 pr-3 text-sm border-none lg:text-lg rounded-xl focus:outline-none text-myVeryDarkBlueColor  text-xs${
                 isDarkMode ? " bg-myMidnightColor text-myWhiteColor" : ""
               }`}
               type="text"
@@ -102,19 +101,19 @@ export const Home = () => {
                 alt="filter icon"
                 onClick={() => setOpenModal(!openModal)}
               /> */}
-              <div onClick={() => setOpenModal(!openModal)} className=" top-10">
+              <div onClick={() => setOpenModal(!openModal)} className=" mt-1">
                 <CustomFilterIcon />
               </div>
 
               <img
                 src={search_icon}
                 alt=""
-                className=" bg-myVioletColor p-2  rounded-md  ml-2   mt-1"
+                className=" bg-myVioletColor p-2  rounded-md  ml-4  -mr-10  -mt-2"
                 onClick={() => setOpenModal(!openModal)}
               />
             </div>
           </div>
-          <div className="hidden md:flex w-full  border-r-slate-500 border-r-2 mr-2">
+          <div className="hidden md:flex w-full md: border-r-slate-500 md:border-r-2 mr-2">
             <img
               src={location_icon}
               alt=""
@@ -166,7 +165,7 @@ export const Home = () => {
           </div>
         )}
         <div className="flex items-center justify-center">
-          {loadMoreVisible && (
+          {loadMoreVisible && visibleJobs && (
             <button
               className="w-28 h-10  text-sm font-normal text-white rounded-md bg-myVioletColor hover:bg-myLightVioletColor mb-8 "
               onClick={loadMoreJobs}
