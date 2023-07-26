@@ -40,6 +40,7 @@ export const useJobFilter = () => {
       setJobs(initialJobs);
       filterJobs(initialJobs);
       setLoading(false);
+      console.log(jobs, "jobs in the filter");
     } catch (error) {
       console.error("Error fetching jobs:", error);
       setError("Failed to fetch jobs.");
@@ -121,5 +122,6 @@ export const useJobFilter = () => {
     setLocationFilter,
     setSearchFilter,
     loadMoreJobs,
+    jobs,
   };
 };
